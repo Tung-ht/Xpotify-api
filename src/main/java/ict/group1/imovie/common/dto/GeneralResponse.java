@@ -1,4 +1,4 @@
-package ict.group1.imovie.common;
+package ict.group1.imovie.common.dto;
 
 import ict.group1.imovie.common.constant.HttpStatusConstant;
 import lombok.AllArgsConstructor;

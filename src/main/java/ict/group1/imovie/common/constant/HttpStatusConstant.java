@@ -13,4 +13,15 @@ public class HttpStatusConstant {
     public final static String UNAVAILABLE_CODE = "99999";
     public final static String UNAVAILABLE_MESSAGE = "Sorry, our service is temporarily interrupted. Please try again later";
 
+    // SQL EXCEPTION
+    public final static String SQL_CONNECTION_ERROR_CODE = "00001";
+    public final static String SQL_CONNECTION_ERROR_MESSAGE = "Some thing wrong with connection of database";
+
+    // Null pointer exception
+    public final static String NULL_POINTER_OR_BAD_REQUEST_CODE = "00010";
+    public final static String NULL_POINTER_OR_BAD_REQUEST_MESSAGE = "You passed wrong or blank input data!";
+
+    //AUTH
+    public final static String USERNAME_NOT_EXIST_CODE = "00020";
+    public final static String USERNAME_NOT_EXIST_MESSAGE = "Username doesn't exist!";
 }
