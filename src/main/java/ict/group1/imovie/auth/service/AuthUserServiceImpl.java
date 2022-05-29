@@ -5,6 +5,7 @@ import ict.group1.imovie.common.entity.auth.AuthUser;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
+import org.springframework.security.core.userdetails.User;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
@@ -21,10 +22,10 @@ public class AuthUserServiceImpl implements AuthUserService {
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
         AuthUser user = authUserRepository.findAuthUserByUsername(username);
         if (user == null) {
-            throw new UsernameNotFoundException("Username: " + username + " doesn't exist");
+            throw new UsernameNotFoundException("Username: \"" + username + "\" doesn't exist");
         }
         Set<GrantedAuthority> grantedAuthorities = new HashSet<>();
         grantedAuthorities.add(new SimpleGrantedAuthority(user.getRole()));
-        return new org.springframework.security.core.userdetails.User(user.getUsername(), user.getPassword(), grantedAuthorities);
+        return new User(user.getUsername(), user.getPassword(), grantedAuthorities);
     }
 }
