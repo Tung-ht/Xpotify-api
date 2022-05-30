@@ -15,9 +15,12 @@ spring:
         dialect: org.hibernate.dialect.MySQL5InnoDBDialect
     open-in-view: off
 
-  security:
-    user:
-      name: admin
-      password: admin
-      roles: ROLE_ADMIN
-
+#login:
+#  admin:
+#    username: admin
+#    password: 1
+#    roles: ADMIN
+#  user:
+#    username: user
+#    password: 1
+#    roles: USER

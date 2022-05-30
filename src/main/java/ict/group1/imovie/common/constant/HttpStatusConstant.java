@@ -22,6 +22,9 @@ public class HttpStatusConstant {
     public final static String NULL_POINTER_OR_BAD_REQUEST_MESSAGE = "You passed wrong or blank input data!";
 
     //AUTH
-    public final static String USERNAME_NOT_EXIST_CODE = "00020";
-    public final static String USERNAME_NOT_EXIST_MESSAGE = "Username doesn't exist!";
+    public final static String AUTHENTICATION_FAIL_CODE = "00020";
+    public final static String AUTHENTICATION_FAIL_MESSAGE = "Username does not exist or Password is wrong!";
+
+    public final static String UNAUTHORIZED_CODE = "00021";
+    public final static String UNAUTHORIZED_MESSAGE = "You are unauthorized!";
 }

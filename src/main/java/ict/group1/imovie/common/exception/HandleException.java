@@ -4,6 +4,7 @@ package ict.group1.imovie.common.exception;
 import ict.group1.imovie.common.constant.HttpStatusConstant;
 import ict.group1.imovie.common.dto.GeneralResponse;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.security.authentication.BadCredentialsException;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
@@ -14,16 +15,6 @@ import java.util.Arrays;
 @RestControllerAdvice
 @Slf4j
 public class HandleException {
-
-    @ExceptionHandler(BusinessException.class)
-    public GeneralResponse<?> handleBusinessException(BusinessException ex) {
-        return GeneralResponse.error(ex.getCode(), ex.getMessage());
-    }
-
-    @ExceptionHandler(UsernameNotFoundException.class)
-    public GeneralResponse<?> handleUsernameNotFoundException(UsernameNotFoundException ex) {
-        return GeneralResponse.error(HttpStatusConstant.USERNAME_NOT_EXIST_CODE, HttpStatusConstant.USERNAME_NOT_EXIST_MESSAGE);
-    }
 
     @ExceptionHandler({NullPointerException.class})
     public GeneralResponse<?> handleNullPointerException(NullPointerException nullPointerException) {
@@ -38,6 +29,11 @@ public class HandleException {
         log.error("SQLException => message: {}", ex.getMessage());
         return GeneralResponse.error(HttpStatusConstant.SQL_CONNECTION_ERROR_CODE, HttpStatusConstant.SQL_CONNECTION_ERROR_MESSAGE);
 
+    }
+
+    @ExceptionHandler(BusinessException.class)
+    public GeneralResponse<?> handleBusinessException(BusinessException ex) {
+        return GeneralResponse.error(ex.getCode(), ex.getMessage());
     }
 
     @ExceptionHandler(Exception.class)

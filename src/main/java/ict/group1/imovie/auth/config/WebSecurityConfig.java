@@ -1,13 +1,16 @@
 package ict.group1.imovie.auth.config;
 
+import ict.group1.imovie.auth.config.exceptionhandler.RestAccessDeniedHandler;
+import ict.group1.imovie.auth.config.exceptionhandler.RestAuthenticationEntryPoint;
 import ict.group1.imovie.auth.service.AuthUserService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
-import org.springframework.security.config.http.SessionCreationPolicy;
 
+@Configuration
 @EnableWebSecurity
 public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
@@ -24,18 +27,24 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
         http
                 .csrf().disable()
                 .httpBasic()
-                .and()
 
-                .sessionManagement()
-                .sessionCreationPolicy(SessionCreationPolicy.STATELESS)
+                .and()
+                .logout().deleteCookies("JSESSIONID")
+                .and()
+                .rememberMe().key("uniqueAndSecret").tokenValiditySeconds(86400)
+
+//                .and()
+//                .sessionManagement()
+//                .sessionCreationPolicy(SessionCreationPolicy.STATELESS)
 
                 .and()
                 .authorizeRequests()
                 .antMatchers("/login").permitAll()
-
+                .antMatchers("/api/admin").hasAnyAuthority("ROLE_ADMIN") // same as hasAnyRole("ADMIN")
+                .antMatchers("/api/user").hasAnyAuthority("ROLE_USER")
+                .anyRequest().authenticated()
                 .and()
-                .authorizeRequests()
-//                .antMatchers("/api").hasAnyAuthority("ROLE_ADMIN", "ROLE_USER")
-                .anyRequest().authenticated();
+                .exceptionHandling().authenticationEntryPoint(new RestAuthenticationEntryPoint())
+                .accessDeniedHandler(new RestAccessDeniedHandler());
     }
 }
