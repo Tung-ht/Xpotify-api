@@ -39,9 +39,9 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
                 .and()
                 .authorizeRequests()
-                .antMatchers("/login").permitAll()
-                .antMatchers("/api/admin").hasAnyAuthority("ROLE_ADMIN") // same as hasAnyRole("ADMIN")
-                .antMatchers("/api/user").hasAnyAuthority("ROLE_USER")
+                .antMatchers("/v3/api-docs/**", "/swagger-ui/**", "/swagger-ui.html").permitAll()
+                .antMatchers("/admin").hasAnyAuthority("ROLE_ADMIN") // same as hasAnyRole("ADMIN")
+                .antMatchers("/user").hasAnyAuthority("ROLE_USER")
                 .anyRequest().authenticated()
                 .and()
                 .exceptionHandling().authenticationEntryPoint(new RestAuthenticationEntryPoint())

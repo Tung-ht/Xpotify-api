@@ -1,6 +1,7 @@
 package ict.group1.imovie.auth.service;
 
 import ict.group1.imovie.auth.repo.AuthUserRepository;
+import ict.group1.imovie.common.dto.GeneralResponse;
 import ict.group1.imovie.common.entity.auth.AuthUser;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -37,4 +38,5 @@ public class AuthUserServiceImpl implements AuthUserService {
     public List<AuthUser> getListUsers() {
         return authUserRepository.findAll();
     }
+
 }

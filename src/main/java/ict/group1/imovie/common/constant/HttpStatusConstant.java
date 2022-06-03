@@ -27,4 +27,7 @@ public class HttpStatusConstant {
 
     public final static String UNAUTHORIZED_CODE = "00021";
     public final static String UNAUTHORIZED_MESSAGE = "You are unauthorized!";
+
+    public final static String NOT_LOGGING_IN_CODE = "00022";
+    public final static String NOT_LOGGING_IN_MESSAGE = "You are not logging in!";
 }
